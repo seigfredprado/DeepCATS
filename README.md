@@ -1,6 +1,6 @@
-# DeepCATS
+# DeepCATS-AD
 
-Repository for **Deep**learning **C**ounting in **A**natomically **T**argeted **S**tructures and general TissueCyte usage. The goal of this repo is to provide the tools and instructions for stitching TissueCyte images, registering with the Allen Brain Atlas and cell counting using the DeepCATS pipeline.
+Repository for **Deep**learning **C**ounting in **A**natomically **T**argeted **S**tructures for **A**lzheimer's **D**isease mouse models and general TissueCyte usage. The goal of this repo is to provide the tools and instructions for stitching TissueCyte images, registering with the Allen Brain Atlas and cell counting using the DeepCATS-AD pipeline.
 
 This repo has broken down into different appropriately-named folders.
 
