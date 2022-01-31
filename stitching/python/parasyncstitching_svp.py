@@ -2,7 +2,7 @@
 ################################################################################
 Parallel-and-asynchronous Stitching Script - Parallel version
 
-Author: Gerald M
+Authors: Gerald Moore, Seigfred Prado
 
 This script pulls the data generated through TissueCyte (or another microscope system) and
 can perfom image averaging correction on the images if requested, before calling ImageJ
@@ -13,11 +13,11 @@ registered. Otherwise the X overlap will be used for both.
 The pipeline has been sped up in some areas by parallelising some functions.
 
 Installation:
-1) Navigate to the folder containing the parasyncstitchGM.py
+1) Navigate to the folder containing the parasyncstitching_svp.py
 2) Run 'pip install -r requirements.txt'
 
 Instructions:
-1) Run the script in a Python IDE (e.g. for Python 3 > exec(open('parasyncstitchicGM_v2.py').read()))
+1) Run the script in a Python IDE (e.g. for Python 3 > exec(open('parasyncstitching_svp.py').read()))
 2) Fill in the parameters that you are asked for
    Note: You can drag and drop folder paths (works on MacOS) or copy and paste the paths
    Note: The temporary directory is required to speed up ImageJ loading of the files
@@ -32,6 +32,7 @@ Important updates:
 05.02.20 -  Removed 16-bit
 05.02.20 -  Added feathering to tile edge and stitching with max intensity
 10.02.20 -  Added average tile from flatfield imaging and uses that for correction
+09.09.21 -  Modified drive locations and crop parameter to remove white edges (by Seig)
 ################################################################################
 """
 
@@ -47,29 +48,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL']='2'
 warnings.simplefilter('ignore', Image.DecompressionBombWarning)
 Image.MAX_IMAGE_PIXELS = 1000000000
 
-#=============================================================================================
-# Slack notification
-#=============================================================================================
-
-def slack_message(text, channel, username):
-    from urllib import request, parse
-    import json
-
-    post = {
-            "text": "{0}".format(text),
-            "channel": "{0}".format(channel),
-            "username": "{0}".format(username),
-            "icon_url": "https://github.com/gm515/gm515.github.io/blob/master/Images/imperialstplogo.png?raw=true"
-            }
-
-    try:
-        json_data = json.dumps(post)
-        req = request.Request('https://hooks.slack.com/services/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',
-            data=json_data.encode('ascii'),
-            headers={'Content-Type': 'application/json'})
-        resp = request.urlopen(req)
-    except Exception as em:
-        print("EXCEPTION: " + str(em))
 
 #=============================================================================================
 # Function to load images in parallel
@@ -223,7 +201,7 @@ if __name__ == '__main__':
         overlapypath = '"/Applications/Fiji.app/plugins/OverlapY.ijm"'
     if get_platform() == 'linux':
         imagejpath = '/opt/fiji/Fiji.app/ImageJ-linux64'
-        overlapypath = '"/home/svp15/DeepCATS/stitching/OverlapY.ijm"'
+        overlapypath = '"/home/svp15/DeepCATS/stitching/OverlapY.ijm"'    # MODIFY THIS PART!!!
     if get_platform() == 'Windows':
         imagejpath = 'fill in path to imagej executable'
         overlapypath = '"fill in path to OverlapY.ijm"'
@@ -399,7 +377,7 @@ if __name__ == '__main__':
             if avgcorr == 'y':
                 if corrtile is None:
                     # corrtile = generate_corr(tcpath, scanid, startsec, trueendsec)
-                    avg_tile_path = '/home/svp15/DeepCATS/stitching/AVG_IMG.tif'
+                    avg_tile_path = '/home/svp15/DeepCATS/stitching/AVG_IMG.tif'       # MODIFY THIS PART!!!!
                     corrtile = generate_corr_v2(avg_tile_path)
                     print ('Computed correction tile from 1000 random samples.')
 
@@ -496,4 +474,4 @@ if __name__ == '__main__':
 
     print ('')
     print (text)
-    slack_message(text, '#stitching', 'Stitching')
+
