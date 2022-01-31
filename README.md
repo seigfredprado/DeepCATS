@@ -71,7 +71,7 @@ Everything is correct. If it complains about any missing modules, then go ahead 
 
 2. Activate the environment and run the stitching script `exec(open("./parasyncstitchicGM_v2.py").read())`.
 
-3. You will be greated with the following
+3. You will be greeted with the following
 ```
 ------------------------------------------
              Parameter Input
