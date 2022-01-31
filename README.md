@@ -144,9 +144,9 @@ The `fixedpts` and `movingpts` are only useful if you want to input a set of lan
 
 After the registration is complete, there should be a folder called `Registration_<paramterfilenames>_<date>` with files generated in the folder where the autofluorescence TissueCyte TIFF data (i.e. the file path you input in step 2.). You may want to open the files and overlay them onto the autofluorescence data to check everything matches up. This can be done in ImageJ/Fiji. As a tip, the segmentation result is saved as a 32-bit TIFF file, but the range of pixel intensities is squashed into the first few thousand values from a possible range of 2<sup>32</sup>. This makes the segmentation result look completely empty if you edit the contrast in ImageJ/Fiji and set the upper threshold (use the Set button as otherwise it becomes fiddly), and change the upper limit to 2000. This will compress all pixel values to between 0-2000 and will make things much easier to see. You can also run an edge filter to convert the structures to outlines and then use the colour through `Image > Color Merge > Channels` to overlay the outlines of the segmentation result with the autofluorescence. There should also be a hemisphere atlas created which divides the annotation atlas in half and is needed to do the cell counting in the next step.
 
-## DeepCATS cell counting using the registration result
+## DeepCATS-AD amyloid plaque counting using the registration result
 
-The cell counting pipeline uses the registration result to target counting to particular structures. You could also ignore this and simply count in a stack of images. This section only concerns the execution of the pipeline. The next section will look at creating new models, adding data and generally improving the accuracy. The important modules for this are Keras and TensorFlow so it is worth looking up what they are and how to use them!
+The amyloid plaque counting pipeline uses the registration result to target counting to particular structures. You could also ignore this and simply count in a stack of images. This section only concerns the execution of the pipeline. The next section will look at creating new models, adding data and generally improving the accuracy. The important modules for this are Keras and TensorFlow so it is worth looking up what they are and how to use them!
 
 ### Installation
 
@@ -210,7 +210,7 @@ Execution time: ?
 ============================================
 ```
 
-## Adding/Improving DeepCATS
+## Adding/Improving DeepCATS-AD
 
 ### Adding new data
 
