@@ -202,7 +202,7 @@ if __name__ == '__main__':
         overlapypath = '"/Applications/Fiji.app/plugins/OverlapY.ijm"'
     if get_platform() == 'linux':
         imagejpath = '/opt/fiji/Fiji.app/ImageJ-linux64'
-        overlapypath = '"/rds/general/user/svp15/home/DeepCATS/stitching/OverlapY.ijm"'    # MODIFY THIS PART!!!
+        overlapypath = '"/rds/general/user/svp15/home/DeepCATS-AD/stitching/OverlapY.ijm"'    # MODIFY THIS PART!!!
     if get_platform() == 'Windows':
         imagejpath = 'fill in path to imagej executable'
         overlapypath = '"fill in path to OverlapY.ijm"'
@@ -217,44 +217,18 @@ if __name__ == '__main__':
     print ('')
     print ('Fill in the following variables. To accept default value, leave response blank.')
     print ('Please note this creates a temporary folder to hold images. You require at least 1 GB of free space.')
-    acknowledge = input('Press Enter to continue: ')
-    tcpath = input('Select TC data directory (drag-and-drop or type manually): ').rstrip()
-    startsec = input('Start section (default start): ')
-    endsec = input('End section (default end): ')
-    xoverlap = input('X overlap % (default 7.2): ')
-    yoverlap = input('Y overlap % (default 7.2): ')
-    channel = input('Channel to stitch (0 - combine all channels): ')
-    while not channel:
-        channel = input('Channel to stitch (0 - combine all channels): ')
-    avgcorr = input('Perform average correction? (y/n): ')
-    while avgcorr not in ('y', 'n'):
-        avgcorr = input('Perform average correction? (y/n): ')
-    convert = input('Perform additional downsize? (y/n): ')
-    while convert not in ('y', 'n'):
-        convert = input('Perform additional downsize? (y/n): ')
-    if convert == 'y':
-        downsize = input('Downsize amount (default 0.054 for 10 um/pixel): ')
+    #acknowledge = input('Press Enter to continue: ')
+    datapath = '/rds/general/project/thefarm2/live/Tissuecyte/5xFAD/Data/m122'
+    tcpath = datapath.rstrip()
+    startsec = 1
+    endsec = 20
+    xoverlap = 7.2
+    yoverlap = 7.2
+    channel = 3
+    avgcorr = 'y'
+    convert = 'y'
+    downsize = 0.054
 
-    # Handle default values
-    if not startsec:
-        startsec = 1
-    else:
-         startsec = int(startsec)
-    if endsec:
-        endsec = int(endsec)
-    if not xoverlap:
-        xoverlap = 7.2
-    else:
-        xoverlap = float(xoverlap)
-    if not yoverlap:
-        yoverlap = 7.2
-    else:
-        yoverlap = float(yoverlap)
-    if convert == 'y':
-        if not downsize:
-            downsize = 0.054
-        else:
-            downsize = float(downsize)
 
     # Search the mosaic file for remaining parameters
     mosaicfile = glob.glob(os.path.join(tcpath, 'Mosaic*.txt'))[0]
@@ -378,7 +352,7 @@ if __name__ == '__main__':
             if avgcorr == 'y':
                 if corrtile is None:
                     # corrtile = generate_corr(tcpath, scanid, startsec, trueendsec)
-                    avg_tile_path = '/rds/general/user/svp15/home/DeepCATS/stitching/AVG_IMG.tif'       # MODIFY THIS PART!!!!
+                    avg_tile_path = '/rds/general/user/svp15/home/DeepCATS-AD/stitching/AVG_IMG.tif'       # MODIFY THIS PART!!!!
                     corrtile = generate_corr_v2(avg_tile_path)
                     print ('Computed correction tile from 1000 random samples.')
 
