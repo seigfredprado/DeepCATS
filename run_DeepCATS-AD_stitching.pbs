@@ -1,0 +1,12 @@
+#PBS -l walltime=06:00:00
+#PBS -l select=1:ncpus=256:mem=960gb
+#PBS -N m118_stitching
+
+module load fiji/2020-09-03
+
+module load anaconda3/personal
+source activate deepcats-env
+
+cd $PBS_O_WORKDIR
+
+python $PBS_O_WORKDIR/stitching/python/parasyncstitching_svp_hpc.py
