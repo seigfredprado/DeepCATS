@@ -1,0 +1,5 @@
+w=getWidth; h=getHeight; z=5;
+run("Size...", "width=w height=h depth=z interpolation=Bilinear");
+run("Enhance Contrast", "saturated=0.35");
+run("Image Sequence... ", "format=TIFF use start=1 save=/Volumes/thefarm2/live/TissueCyte/5xFAD/Data/y21/y21-Mosaic/Ch3_projections/Ch3_z-scaled");
+close();
